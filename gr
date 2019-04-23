@@ -1,0 +1,20 @@
+#!/usr/local/plan9/bin/rc
+rfork e
+
+ifs='
+'
+
+files=`{git ls-files |grep '.*\.[bcChlmsy]$|.*\.asm$|.*\.awk$|.*\.cc$|.*\.cgi$|.*\.cpp$|.*\.cs$|.*\.go$|.*\.goc$|.*\.java$|.*\.lx$|.*\.md$|.*\.ms$|.*\.pl$|.*\.py$|.*\.rc$|.*\.tex$|.*\.xy$'}
+
+matches=`{>[2]/dev/null git grep -npE $"* $files}
+
+switch ($#matches) {
+	case 0
+		echo no matches
+	case *
+		echo '----------- gr '^$*^' -----------'
+		for (match in $matches) {
+			echo $match
+		}
+		#>[2]/dev/null g $* ($files)
+}

@@ -1,0 +1,21 @@
+#!/usr/local/plan9/bin/rc
+rfork e
+
+ifs='
+'
+
+files=`{git ls-files |grep '.*\.[cC]$'}
+
+matches=`{>[2]/dev/null git grep -nE '^([^ 	]+[ 	]+)*([*]+[ 	]*)*'^$"*^'\(' $files}
+
+switch ($#matches) {
+	case 0
+		echo no matches
+	case 1		
+		echo $matches(1)
+		B `{echo $matches(1) |/usr/bin/sed -r 's/^(.*:[0-9]+):.*/\1/'}
+	case *
+		for (match in $matches) {
+			echo $match
+		}
+}
