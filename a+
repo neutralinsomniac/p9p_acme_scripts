@@ -1,2 +1,2 @@
-#!/usr/local/plan9/bin/rc
+#!/usr/bin/env rc
 sed 's/^/    /'
