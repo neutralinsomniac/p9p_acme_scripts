@@ -13,7 +13,7 @@ switch ($#matches) {
 		echo no matches
 	case 1		
 		echo $matches(1)
-		B `{echo $matches(1) |/usr/bin/sed -r 's/^(.*:[0-9]+):.*/\1/'}
+		B `{echo $matches(1) |sed -r 's/^(.*:[0-9]+):.*/\1/'}
 	case *
 		for (match in $matches) {
 			echo $match
